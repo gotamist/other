@@ -3,6 +3,9 @@
 import sys
 import pickle
 import os
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 os.chdir('/home/thojo/work/ud/ml/fraud_from_email')
 sys.path.append("../tools/")
 
@@ -12,15 +15,27 @@ from tester import dump_classifier_and_data
 ### Task 1: Select what features you'll use.
 ### features_list is a list of strings, each of which is a feature name.
 ### The first feature must be "poi".
-features_list = ['poi','salary'] #, '', '', '', ''] # need to use more features
+features_list = ['poi','salary', 'bonus', 'exercised_stock_options', 'long_term_incentive', 'from_this_person_to_poi', 'from_poi_to_this_person', 'shared_receipt_with_poi'] # need to use more features
 
 ### Load the dictionary containing the dataset
 with open("final_project_dataset.pkl", "r") as data_file:
     data_dict = pickle.load(data_file)
 
 ### Task 2: Remove outliers
+data_dict.pop('TOTAL') #Obvious choice
+data_dict.pop( 'THE TRAVEL AGENCY IN THE PARK' ) # a whole bunch of NaNs and clearly not a person
+data_dict.pop('LOCKHART EUGENE E') # NaN in all field except poi 
     
 ### Task 3: Create new feature(s)
+df = pd.DataFrame.from_records(list(data_dict.values()), index=data_dict.keys())    
+for colname in df.columns.values:
+    df[ colname ] = pd.to_numeric( df[ colname ], errors = 'coerce' ) 
+df[ 'emails_to_poi_ratio' ] = df[ 'from_this_person_to_poi' ] /   df[ 'from_messages' ] 
+df[ 'emails_from_poi_ratio' ] = df[ 'from_poi_to_this_person' ] /  df[ 'to_messages' ] 
+df[ 'poi_communication' ] = df[ 'emails_to_poi_ratio' ] + df[ 'emails_from_poi_ratio' ] #collinear with the other two features created just above
+
+# comp_features
+
 ### Store to my_dataset for easy export below.
 my_dataset = data_dict
 
