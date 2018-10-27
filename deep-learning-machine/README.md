@@ -25,4 +25,14 @@ and the software installed on it.
 * __Power Supply:__ EVGA - SuperNOVA G3 1000W 80+ Gold Certified Fully-Modular ATX Power Supply
 * __Case:__ Corsair - 780T ATX Full Tower Case
 
+## What it's running
 
+* Ubuntu 18.04
+* Cuda 9.0.176
+* NVIDIA Driver v390.87
+* CuDNN 7.0
+* TensorFlow 1.10.0
+* Keras 2.2.2
+* PyTorch version 0.4.1.post2
+* Python 3.6 and 2.7
+* Anaconda 3 for package management
