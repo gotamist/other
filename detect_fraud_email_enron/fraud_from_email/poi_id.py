@@ -14,6 +14,7 @@ from sklearn.cross_validation import train_test_split
 from sklearn.naive_bayes import GaussianNB
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.svm import SVC
+from sklearn.ensemble import RandomForestClassifier
 
 
 os.chdir('/home/thojo/work/ud/ml/fraud_from_email')
@@ -93,6 +94,9 @@ test_classifier(clf, labels, features, test_size=0.3)
 clf = SVC()
 test_classifier(clf, labels, features, test_size=0.3)
 
+clf = RandomForestClassifier()
+test_classifier(clf, labels, features, test_size=0.3)
+
 ### Task 5: Tune your classifier to achieve better than .3 precision and recall 
 ### using our testing script. Check the tester.py script in the final project
 ### folder for details on the evaluation method, especially the test_classifier
@@ -142,10 +146,20 @@ test_classifier(clf, labels, features, test_size=0.3)
 #
 #avg / total       0.71      0.84      0.77        38
 
+clf = RandomForestClassifier(n_estimators=33,min_samples_leaf=2) #pick odd number of estimators to always get a decision
+test_classifier(clf, labels, features, test_size=0.3)
+#             precision    recall  f1-score   support
+#
+#        0.0       0.89      1.00      0.94        32
+#        1.0       1.00      0.33      0.50         6
+#
+#avg / total       0.91      0.89      0.87        38
+
 # Choose NaiveBayes and test with N-fold cross-validation
 from tester import *
 clf = GaussianNB()
 test_classifier(clf, my_dataset, lean_list, folds = 100)
+
 #GaussianNB(priors=None)
 #Accuracy: 0.86385       Precision: 0.60952      Recall: 0.32000 F1: 0.41967     F2: 0.35359
 #Total predictions: 1300 True positives:   64    False positives:   41   False negatives:  136   True negatives: 1059
