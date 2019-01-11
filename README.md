@@ -1,23 +1,56 @@
 # Traditional machine learning
 
-This repository contains a few projects that are machine learning, but do not have a deep-learning component.  
+This repository contains a few machine learning projects, that do not
+have a deep-learning component. Decision Trees, SVMs, Naïve Bayes,
+SVMs, dimensionality reduction, clustering (Guassian Mixture models,
+k-means)
 
-One of the items is a description of the GPU-enabled machine that I
-built to run my projects in the other repositories as an alternative
-to running them on the cloud.
+Other elements in the thought process, such as exploratory data
+analysis, cross validation, data normalization, appropriate
+visualization, choosing the complexity of the model, evaluation of the
+model are considered
+
 
 ## Boston Housing
 
 This famous dataset contains housing data collected back in 1978.  It
 has the prices of a small number of houses - only 506.  There are 14
 features available for each house.  The problem is a regression
-problem.  Is it possible to use features such as the number of rooms, the neighborhood in which it is located.  The aim is learn what the selling price would be, using these features.
+problem.  Is it possible to use features such as the number of rooms,
+the neighborhood in which it is located.  The aim is learn what the
+selling price would be, using these features.
 
 The problem here is an exploration of decision tree regressors, with
 all its limitations and strengths, a look at bias-variance trade-off
 and the use of cross-validation.
 
-## 
+## Clustering
+
+### Image compression
+The script in this directory is a self-contained script to
+compress any image to a few colors in this without losing a lot of the
+information.  We should expect to be able to compress the image to
+about a third of its size by this alone.  this is done by k-means
+clustering the pixels in color-space.
+
+
+### Identifying customer segments
+
+Here, we segment the costumers (retailers) of a good distribution
+company based on the orders they place for various items.  Other
+matters explored are EDA, PCA for dimensionality reduction.
+
+### Simple movie recommendations
+
+Here, the dataset is the MovieLens Uesr Ratings Dataset
+(https://grouplens.org/datasets/movielens/).  We have about 100,000
+ratings for 9,125 movies from 183 users. k-means can be used to
+cluster them into groups of users of movies. The Silhouette score is
+used to explore the number of groups to clusters to use.
+
+We can use the information from these clusters to predict ratings that
+a particular user may give to a certain movie if that (user, movie)
+pair has no rating recorded.
 
 ## Enron fraud detection
 
@@ -28,3 +61,7 @@ Enron scandal by looking at a number of features, most of the relevant
 ones being related to their compensation details and the degree of
 communication they had with others who were already known to have been
 involved. Please see README within the directory for more.
+
+## Machine
+One of the items is a description of the GPU-enabled machine
+to run my projects as an alternative to running them on the cloud.
